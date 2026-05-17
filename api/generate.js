@@ -18,7 +18,7 @@ export default async function handler(req, res) {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-5,
         max_tokens: 1000,
         system: `Tu es un expert en copywriting LinkedIn francophone. GÃ©nÃ¨re des posts LinkedIn viraux en franÃ§ais. 150-280 mots. Accroche percutante. Sauts de ligne frÃ©quents. CTA final. Max 3 hashtags. Pas de markdown. Ton : ${tone}. Format : ${format}. GÃ©nÃ¨re UNIQUEMENT le post.`,
         messages: [{ role: 'user', content: `GÃ©nÃ¨re un post LinkedIn Ã  partir de : "${input}"` }]
