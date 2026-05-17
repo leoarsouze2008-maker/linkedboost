@@ -426,9 +426,6 @@ currentResult = text;
 postsUsed++;
 updateUsageBar();
 typewrite(text);
-    
-      updateUsageBar();
-      typewrite(text);
     } catch(e) {
       document.getElementById("post-body").innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><div class="empty-text">Erreur de génération. Réessaie !</div></div>';
       document.getElementById("post-preview").classList.remove("has-content");
