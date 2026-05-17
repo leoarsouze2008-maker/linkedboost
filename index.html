@@ -415,18 +415,17 @@
     const formatMap = { hook: "Hook fort", liste: "Liste tips", histoire: "Histoire perso", thread: "Mini-thread" };
 
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: `Tu es un expert en copywriting LinkedIn francophone. Génère des posts LinkedIn viraux et authentiques en français uniquement. 150-280 mots. Accroche percutante en 1-2 lignes. Sauts de ligne fréquents. CTA final. Max 3 hashtags pertinents. Style humain. Pas de markdown. Ton : ${toneMap[currentTone]}. Format : ${formatMap[currentFormat]}. Génère UNIQUEMENT le post.`,
-          messages: [{ role: "user", content: `Génère un post LinkedIn à partir de : "${input}"` }]
-        })
-      });
-      const data = await res.json();
-      const text = data.content?.map(b => b.text || "").join("").trim() || "";
+const res = await fetch("/api/generate", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ input, tone: toneMap[currentTone], format: formatMap[currentFormat] })
+});
+const data = await res.json();
+const text = data.text || "";
+currentResult = text;
+postsUsed++;
+updateUsageBar();
+typewrite(text);
       currentResult = text;
       postsUsed++;
       updateUsageBar();
